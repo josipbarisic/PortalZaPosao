@@ -1,0 +1,18 @@
+<div class="media" id="posaoPosloprimca" ng-value="{{posao.id}}">
+  <div class="media-left container">
+
+    <form class="btnPrijavaPosla" action="action_korisnici.php" method="POST">
+      <input type="hidden" name="action_id" value="prijavi_posao">
+      <input type="hidden" name="posaoId" ng-value="{{posao.id}}">
+      <input type="hidden" name="poslodavacId" ng-value="{{posao.poslodavac_id}}">
+      <button class="btn btn-success">Prijavi se <i class="fas fa-phone"></i></button>
+    </form>
+      <img class="media-object" src="images/jobIcon.png">
+
+  </div>
+  <div class="media-body posaoInfo">
+    <button ng-click="RemoveJobFromPanel(posao.id)" class="close">&times;</button>
+    <h3 class="media-heading" ng-click="GetModalPosla(posao.id)" title="Više informacija"><span id="nazivPosla">{{posao.naziv}}</span> </h3>
+    <p class="opis" ng-click="GetModalPosla(posao.id)" title="Više informacija">{{posao.opis}}</p>
+  </div>
+</div>

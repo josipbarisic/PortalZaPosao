@@ -1,0 +1,13 @@
+<div class="media">
+	<div class="well">
+		<h4 class="media-heading"><span class="label label-info">{{obavijest.naziv_posla}}</span></h4>
+		<h4>{{obavijest.ime_poslodavca}}</h4>
+		<p>Poslodavac je prihvatio vašu prijavu za posao.</p>
+		<p><b>Kontakt:</b> {{obavijest.email_poslodavca}}</p>
+		<form action="action_korisnici.php" method="POST" class="btnObavijest">
+			<input type="hidden" name="action_id" value="obrisi_obavijestPosloprimca">
+			<input type="hidden" name="obavijestId" ng-value="obavijest.id">
+			<button class="btn btn-primary" type="submit">U redu</button>
+		</form>
+	</div>
+</div>

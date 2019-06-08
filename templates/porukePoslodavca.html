@@ -1,0 +1,20 @@
+<div id="panelRazgovora" class="panel panel-primary" ng-repeat="razgovor in oRazgovor">
+	<div id="panelHeader" class="panel-heading">
+		<h2 id="titlePosiljatelj" ng-init="RenderPosiljateljIme(razgovor.posiljatelj)">{{razgovor.posiljatelj}}</h2>
+	</div>
+	<div id="panelBody" class="panel-body">
+		<div ng-repeat="poruka in razgovor.poruke" class="alert alert-success porukaPoslodavac-{{poruka.korisnik}}">
+			<strong>{{poruka.sadrzaj}}</strong>
+			<hr>
+			<footer class="vrijemeSlanja">Poslano: {{poruka.vrijeme_datum}}</footer>
+		</div>
+	</div>
+	<div id="footerRazgovora" class="panel-footer">
+		<form id="formMessage">
+			<input type="hidden" name="action_id" value="posalji_porukuPoslodavac">
+			<input type="hidden" name="razgovor_id" ng-value="razgovor.razgovorId">
+			<textarea rows="2" name="textPoruke" id="textPoruke" class="form-control" placeholder="Nova poruka" maxlength="990"></textarea>
+			<button ng-click="SendMessage()" id="sendMessageBtn" class="btn btn-primary">Pošalji</button>
+		</form>
+	</div>
+</div>

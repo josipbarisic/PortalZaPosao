@@ -1,0 +1,29 @@
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Rbr.</th>
+			<th>Naziv</th>
+			<th>Kategorija</th>
+			<th>Dostupnost</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr ng-repeat="posao in oPoslovi">
+		<td>{{$index+1}}</td>
+		<td>{{posao.naziv}}</td>
+		<td>{{posao.kategorija}}</td>
+		<td>{{posao.dostupnost}}</td>
+		<td><button class="btn btn-primary" ng-click="GetModalPosla(posao.id)">Uredi</button></td>
+		<td>
+			<form action="action_korisnici.php" method="POST">
+				<input type="hidden" name="action_id" value="obrisi_posao">
+				<input type="hidden" name="posaoId" ng-value="posao.id">
+				<button type="submit" class="btn btn-danger">Obriši</button>
+			</form>
+		</td>
+	</tr>
+	</tbody>
+</table>

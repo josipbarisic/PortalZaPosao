@@ -1,0 +1,47 @@
+<?php 
+
+include 'connection.php';
+
+session_start();
+	if(empty($_SESSION['user_id']))
+	{
+		header('Location: index.php');
+	}
+ ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Razgovori</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js" integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/korisnici.css">
+</head>
+<?php 
+
+
+	$sQueryPoslodavci = 'SELECT * FROM poslodavci WHERE poslodavac_id='.$_SESSION['user_id'];
+	$dbResultEmp = $oConnection->query($sQueryPoslodavci);
+	//Podaci poslodavca
+	$dataEmp = $dbResultEmp->fetch(PDO::FETCH_ASSOC);
+	//-----------------------------------------------
+	
+	if(!empty($dataEmp['poslodavac_id']))
+	{
+		include 'templates/razgovoriPoslodavca.html';
+	}
+	else
+	{
+		include 'templates/razgovoriPosloprimca.html';
+	}
+
+ ?>
+
+</html>

@@ -1,0 +1,692 @@
+html{
+	height: 100%;
+	font-family: 'Source Sans Pro', sans-serif;
+	min-width: 468px;
+}
+body{
+	height: 100%;
+	background-image: url("../images/razgovoriBackground.jpg");
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	min-width: 510px;
+}
+#poslodavacBody{
+	background-image: url("../images/PoslodavacBackground.jpg")!important;
+	min-width: 468px;
+}
+#posloprimacBody{
+	background-image: url("../images/PosloprimacBackground.jpg")!important;
+	min-width: 468px;
+}
+
+button{
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+}
+button:focus{
+	outline: 0!important;
+}
+
+/*SCROLLBAR CSS*/
+body ::-webkit-scrollbar
+{
+	width: 10px;
+	border-left: 1px solid black;
+	background-color: rgba(255,255,255, 0.8);
+}
+
+body ::-webkit-scrollbar-thumb
+{
+	border-radius: 4px;
+	background-color: rgba(0,0,0, 0.8);
+}
+
+/*NAVBAR CSS*/
+.navbar{
+	background-color: rgba(139,69,19, 0.6);
+	border: none;
+	border-radius: 0 0 5px 5px; 
+	box-shadow: 0px 0px 10px 0px rgba(50,50,50,1);
+	width: 100%;
+	padding-left: 20px;
+}
+.navbar-brand{
+	padding: 0;
+	margin: 0 10px !important;
+	width: 70px;
+	height: 65px;
+}
+.logoTitle{
+	display: inline-block;
+	height: 65px;
+	text-align: center;
+	margin: 0 10px;
+	line-height: 65px;
+	color: white;
+	font-weight: bold;
+}
+#userName{
+	float: right;
+}
+#updateProfileBtn, #getProfileBtn, #getConversationsBtn{
+	border-radius: 10px;
+	margin: 0 auto 12px auto;
+	font-size: 21px;
+	font-weight: bold;
+}
+#logoutBtn{
+	display: inline-flex;
+	margin: 12px auto 12px auto;
+	width: 150px;
+	background-color: #d63031;
+	color: white;
+	border-radius: 10px;
+	font-size: 21px;
+	font-weight: bold;
+	text-align: center;
+}
+.fa-sign-out-alt{
+	margin: 5px 10px 0 0;
+}
+
+/*PROFILNA STRANICA CSS*/
+.profilePage{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	margin: 0 auto;
+
+}
+.row{
+	width: 100%;
+}
+#panelUser{
+	width: 450px;
+	display: inline-block;
+	background-color: rgba(0,0,0, 0);
+	color: white;
+	border: none;
+	margin: 10px 5px 10px 10px;
+}
+#panelUser .panel-heading{
+	height: 120px;
+	background-color: rgba(0,0,0, 0.7);
+	text-align: center;
+	border-radius: 10px;
+	border: 1px solid black;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+#panelUser .panel-title{
+	color: white;
+	font-size: 42px;
+	margin-top: 30px;
+	line-height: 42px;
+}
+#panelUser .panel-footer{
+	height: 230px;
+	background-color: rgba(0,0,0, 0.7);
+	text-align: left;
+	font-size: 15px;
+	border-radius: 10px;
+	border: 1px solid black;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+#opis{
+	height: 180px;
+}
+#opis p{
+	max-height: 180px;
+	overflow-y: auto;
+}
+#panelUser .panel-body{
+	background-color: rgba(0,0,0, 0.8);
+	text-align: center;
+	height: 230px;
+	padding: 0;
+	border-radius: 10px;
+	border: 1px solid white;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+#panelUser .panel-body img{
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 10px;
+}
+
+/*MODALS CSS*/
+.modal-content{
+	background-color: rgba(0,0,0, 0.8);
+	color: white;
+	width: 450px;
+	margin: 0 auto;
+}
+.modal-content textarea { 
+   /* will prevent resizing horizontally */
+   resize: vertical;
+   overflow-x: hidden;
+}
+.radio{
+	margin-left: 10px;
+}
+.checkbox{
+	margin-left: 20px;
+}
+.close{
+	color: #d63031;
+	opacity: 1;
+	box-shadow: none!important;
+	margin-right: 5px;
+	padding: 1px 5px!important;
+	border: 0;
+}
+.close:hover{
+	color: white;
+}
+#jobInfo{
+	background-color: rgba(27,190,252, 0.75);
+	font-size: 18px;
+}
+.jobInfoLabels{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/*MOJI POSLOVI CSS*/
+
+#panelJobs{
+	display: inline-block;
+	border: 1px solid black;
+	width: 600px;
+	margin: 10px 0 10px 5px;
+	padding: 0 !important;
+	max-height: 600px;
+	background-color: rgba(0,0,0, 0.1);
+}
+#panelJobs .panel-heading{
+	background-color: rgba(0,0,0, 0.8);
+	height: 60px;
+	width: 599px;
+	border: 1px solid black;
+	display: block;
+}
+#panelJobs .panel-body{
+	max-height: 500px;
+	padding: 5px 0 10px 10px;
+	width: 600px;
+	overflow-y: auto;
+	background-color: rgba(255,255,255, 0.95);
+}
+#panelJobs th{
+	background-color: rgba(255,255,255, 0.99);
+}
+.table{
+	margin: 0;
+}
+#btnNewJob{
+	display: inline-block;
+	margin-top: 0 auto;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	float: right;
+	border-radius: 10px;
+	background-color: #1b9cfc;
+	height: 40px;
+}
+#myJobs{
+	display: inline-block;
+	color: white;
+	font-size: 42px;
+	font-weight: bold;
+}
+#posloviPosloprimca{
+	max-height: 600px;
+}
+
+/*KARTICA POSLA POSLOPRIMCA*/
+#posaoPosloprimca{
+	height: 100px;
+	margin: 10px 5px 10px 0;
+}
+#posaoPosloprimca:hover button{
+	display: block;
+}
+#posaoPosloprimca .container{
+	padding: 0;
+	position: relative;
+}
+#posaoPosloprimca .container img{
+	height: auto;
+	width: 100px;
+}
+#posloviPosloprimca .media{
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	background-color: #1b9cfc;
+	color: white;
+}
+#posaoPosloprimca .media-heading{
+	display: inline-block;
+	max-width: 100%;
+	line-height: 30px;
+}
+
+#posaoPosloprimca .media-body{
+	padding: 5px 0 0 10px;
+	width: 100%;
+}
+#posaoPosloprimca .media-left{
+	height: 100px;
+	background-color: gold;
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+}
+#posaoPosloprimca .opis{
+	width: 90%;
+	padding-bottom: 5px;
+	display: inline-block;
+	text-overflow: ellipsis;
+	max-width: 100%;
+	line-height: 20px;
+	color: #eeeeee;
+}
+#posaoPosloprimca #nazivPosla{
+	font-weight: bold;
+}
+.posaoInfo:hover{
+	cursor: pointer;
+	background-color: rgba(27,190,252, 0.75);
+}
+
+.container .btnPrijavaPosla{
+	background-color: rgba(0,0,0, 0);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.container .btn{
+	background-color: rgba(0,0,0, 0.6);
+	display: none;
+	transition: 0.5s ease-out;
+}
+.container .btn:hover{
+	background-color: rgba(50,200,50, 0.9);
+}
+
+/*OBAVIJESTI CSS*/
+#panelNotifications{
+	background-color: rgba(255,255,255, 0);
+	margin: 10px 5px 10px 10px;
+	width: 301px;
+	max-height: 600px;
+	padding: 0;
+	border: 1px solid black;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+	
+}
+#panelNotifications .panel-heading{
+	width: 300px;
+	border: 1px solid black;
+	background-color: rgba(0,0,0, 0.8);
+	color: white;
+}
+#panelNotifications .panel-body{
+
+	background-color: rgba(255,255,255, 0.8);
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 520px;
+}
+.media-heading{
+	line-height: 30px;
+}
+.btnObavijest{
+	display: inline-block!important;
+	margin: 10px;
+}
+#panelJobs{
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+/*PORUKE CSS*/
+#navbarMessages{
+	margin: 0;
+}
+#divPage{
+	background-color: rgba(0,0,0, 0.5);
+	height: 90.5%;
+	position: fixed;
+	padding: 0;
+	overflow-y: auto;
+}
+#newChat{
+	display: inline-block;
+}
+#pageTitle{ 
+	color: white;
+	background-color: rgba(0,0,0, 0.5);
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+	border-radius: 15px;
+	border: 1px solid black;
+	width: 300px;
+	max-width: 100%;
+	text-align: center;
+	display: inline-block;
+}
+#divMessages{
+	width: 100%;
+	height: 90%;
+	border-radius: 4px;
+}
+#btnNewMessage{
+	font-weight: bolder;
+	float: right;
+}
+.panelMessages{
+	height: 100%;
+	padding: 0;
+}
+#panelRazgovora{
+	height: 100%;
+	margin: 0;
+}
+#panelHeader{
+	height: 15%;
+}
+#panelHeader h2{
+	margin: 10px 0;
+}
+#panelBody{
+	height: 70%!important;
+	overflow-y: auto;
+}
+.list-group{
+	margin: 0;
+	max-height: 90%;
+	overflow-y: auto;
+}
+.list-group-item{
+	background-color: rgba(27, 156, 252, 0.6);
+	color: black!important;
+}
+#divMessages .panel, #divMessages .panel-heading{
+	background-color: rgba(27, 156, 252, 0.3);
+}
+hr{
+	margin: 0;
+}
+.vrijemeSlanja{
+	font-size: 10px;
+	text-align: right;
+}
+#posiljatelj{
+	display: inline-block;
+	width: 80%;
+}
+.porukaPoslodavac-posloprimac{
+	float: left;
+	width: 51%;
+	padding: 10px 5px 5px 10px;
+}
+.porukaPoslodavac-poslodavac{
+	float: right;
+	width: 51%;
+	padding: 10px 5px 5px 10px;
+}
+.porukaPosloprimac-posloprimac{
+	float: right;
+	width: 51%;
+	padding: 10px 5px 5px 10px;
+}
+.porukaPosloprimac-poslodavac{
+	float: left;
+	width: 51%;
+	padding: 10px 5px 5px 10px;
+}
+#footerRazgovora{
+	bottom: 0;
+	height: 15%;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+#formMessage #textPoruke{
+	resize: none;
+	width: 60%;
+	display: inline-block;
+	margin: 0;
+}
+#sendMessageBtn{
+	width: 19%;
+	margin: 10px 10%;
+	display: inline-block;
+}
+
+@media (max-width: 1400px) {
+	#panelNotifications{
+		/*height: 540px;*/
+		position: absolute;
+		top: 465px;
+		bottom: 10px;
+		left: 535px;
+		width: 600px;
+		height: 200px;
+	}
+	#panelNotifications .panel-heading{
+		width: 100%!important;
+	}
+	#panelNotifications .panel-body{
+		height: 80%!important;
+		overflow-y: auto;
+		width: 100%;
+	}
+	#panelJobs {
+		max-height: 400px;
+		margin-left: 80px;
+	}
+	#panelJobs .panel-body{
+		max-height: 300px;
+		overflow-y: auto;
+	}
+}
+@media (max-width: 1180px) {
+	.profilePage{
+		padding-right: 10px;
+	}
+	#panelUser
+	{
+		margin: 0;
+		width: 60%;
+	}
+	#panelUser .panel-heading{
+		display: inline-table;
+		margin: 0 auto;
+		width: 100%;
+	}
+	#panelUser .panel-body{
+		float: left;
+	}
+	#panelUser .panel-footer{
+		float: right;
+	}
+	#panelUser .panel-footer, #panelUser .panel-body{
+		display: inline-block;
+		margin: 0;
+		padding: 10px 10px;
+		height: 260px;
+		width: 50%;
+	}
+	#opis{
+		margin: 0;
+	}
+	#panelJobs{
+		width: 59.99%;
+		margin: 10px 20%;
+	}
+	#panelJobs .panel-heading, #panelJobs .panel-body{
+		width: 100%;
+	}
+	#panelNotifications{
+		position: static;
+		margin: 120px 0 0 0;
+		width: 40%;
+		display: inline-block;
+		height: 260px;
+	}
+	#panelNotifications .panel-heading{
+		width: 100%;
+	}
+	#panelNotifications .panel-body{
+		width: 100%;
+		height: 85%!important;
+	}
+}
+
+@media (max-width: 950px) {
+	#panelUser .panel-body, #panelUser .panel-footer{
+		height: 300px;
+	}
+	#opis p{
+		max-height: 200px;
+	}
+	#panelUser .panel-body{
+		padding: 25% auto;
+	}
+	#panelUser .panel-body img{
+		width: 100%;
+		max-height: 100%!important;
+	}
+	#panelNotifications{
+		height: 420px;
+		margin-top: 0;
+	}
+	#panelNotifications .panel-body{
+		width: 100%;
+		height: 90.6%!important;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+	}
+	#panelJobs{
+		width: 79.99%;
+		margin: 10px 10%;
+	}
+	.navbar-brand, .logoTitle,#updateProfileBtn, #getProfileBtn, #getConversationsBtn, #logoutBtn{
+		transform: scale(0.8);
+	}
+}
+
+@media (max-width: 930px){
+	.logoTitle{
+		display: none;
+	}
+	#updateProfileBtn, #getProfileBtn, #getConversationsBtn{
+		margin: 12px 0;
+	}
+}
+
+@media (max-width: 770px) {
+	#logoutBtn
+	{
+		float: right;
+	}
+	html{
+		width: 100%;
+	}
+	body{
+		background-attachment: fixed!important;
+	}
+	.navbar{
+		width: 100%;
+	}
+	#panelUser, #panelUser .panel-heading, #panelUser .panel-body, #panelUser .panel-footer{
+		width: 100%;
+	}
+	/*#panelUser .panel-body{
+		height: 160px;
+	}*/
+	#panelUser .panel-body img{
+		width: initial;
+		height: 100%;
+		max-width: 80%;
+	}
+	#panelUser .panel-footer{
+		height: 200px;
+	}
+	#panelNotifications{
+		width: 80%;
+		height: 200px;
+		margin: 20px 10%;
+	}
+	#panelNotifications .panel-body{
+		width: 100%;
+		height: 80%!important;
+	}
+
+	#panelUser, #panelNotifications, #panelJobs{
+		transform: scale(0.9);
+	}
+	#panelJobs{
+		width: 99%;
+		margin: 0;
+	}
+	.panelMessages, #panelRazgovora{
+		width: 100%;
+		min-width: 468px;
+	}
+	.panelMessages .col-lg-4 .col-sm-4{
+		height: 20%;
+	}
+
+}
+@media (max-width: 767px) {
+	.logoTitle{
+		display: none;
+	}
+	#updateProfileBtn, #getProfileBtn, #getConversationsBtn{
+		margin: 12px auto;
+	}
+}
+@media (max-width: 635px) {
+	.logoTitle{
+		display: block;
+	}
+	#panelUser .panel-body img{
+		height: 100%;
+		max-width: 100%;
+	}
+}
+@media (max-width: 625px) {
+	#panelJobs .panel-body{
+		overflow-x: hidden;
+		font-size: 12px;
+		padding: 0;
+	}
+	#panelJobs .panel-body .table{
+		width: 99%;
+	}
+}
+@media (max-width: 600px) {
+	#panelUser, #panelNotifications, #panelJobs, #myJobs, #btnNewJob{
+		transform: scale(0.9);
+	}
+	#panelUser, #panelNotifications, #panelJobs{
+		width: 99%;
+		margin: 0;
+	}
+	#myJobs{
+		font-size: 30px;
+	}
+	#panelJobs .panel-body{
+		font-size: 10px;
+	}
+	#titlePosiljatelj{
+		font-size: 15px!important;
+	}
+	#updateProfileBtn, #getProfileBtn, #getConversationsBtn, #logoutBtn{
+		transform: scale(0.6);
+		display: inline-block;
+		margin: 0;
+	}
+	#logoutBtn{
+		float: none;
+	}
+}
