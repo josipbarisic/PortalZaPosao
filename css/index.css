@@ -8,8 +8,29 @@ body{
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
-	/*min-width: 420px!important;*/
 }
+
+button{
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+}
+button:focus{
+	outline: 0!important;
+}
+
+/*SCROLLBAR CSS*/
+body ::-webkit-scrollbar
+{
+	width: 10px;
+	border-left: 1px solid black;
+	background-color: rgba(255,255,255, 0.8);
+}
+
+body ::-webkit-scrollbar-thumb
+{
+	border-radius: 4px;
+	background-color: rgba(0,0,0, 0.8);
+}
+
 
 /*NAVBAR CSS*/
 .navbar{
@@ -151,8 +172,9 @@ body{
    /* will prevent resizing horizontally */
    resize:vertical;
 }
-.modal-content img{
-	width: 200px;
+#modals .modal-body{
+	max-height: 500px!important;
+	overflow-y: auto;
 }
 .radios{
 	margin-left: 20px;

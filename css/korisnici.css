@@ -33,7 +33,7 @@ body ::-webkit-scrollbar
 {
 	width: 10px;
 	border-left: 1px solid black;
-	background-color: rgba(255,255,255, 0.8);
+	background-color: rgba(255,255,255, 0.5);
 }
 
 body ::-webkit-scrollbar-thumb
@@ -160,6 +160,10 @@ body ::-webkit-scrollbar-thumb
 	color: white;
 	width: 450px;
 	margin: 0 auto;
+}
+#modals .modal-body{
+	max-height: 500px!important;
+	overflow-y: auto;
 }
 .modal-content textarea { 
    /* will prevent resizing horizontally */
@@ -359,9 +363,6 @@ body ::-webkit-scrollbar-thumb
 	padding: 0;
 	overflow-y: auto;
 }
-#newChat{
-	display: inline-block;
-}
 #pageTitle{ 
 	color: white;
 	background-color: rgba(0,0,0, 0.5);
@@ -393,8 +394,18 @@ body ::-webkit-scrollbar-thumb
 #panelHeader{
 	height: 15%;
 }
-#panelHeader h2{
+#panelHeader #titlePosiljatelj{
 	margin: 10px 0;
+	width: 70%;
+	display: inline-block;
+}
+#panelHeader #slikaRazgovora{
+	display: inline-block;
+	max-height: 100%;
+	max-width: 25%;
+	background-color: rgba(0,0,0, 0.6);
+	float: right;
+	border-radius: 15px;
 }
 #panelBody{
 	height: 70%!important;
@@ -421,7 +432,7 @@ hr{
 }
 #posiljatelj{
 	display: inline-block;
-	width: 80%;
+	width: 50%;
 }
 .porukaPoslodavac-posloprimac{
 	float: left;
@@ -444,26 +455,25 @@ hr{
 	padding: 10px 5px 5px 10px;
 }
 #footerRazgovora{
-	bottom: 0;
+	/*bottom: 0;*/
 	height: 15%;
 	width: 100%;
 	background-color: rgba(255, 255, 255, 0.1);
 }
 #formMessage #textPoruke{
 	resize: none;
-	width: 60%;
+	width: 79%;
 	display: inline-block;
 	margin: 0;
 }
 #sendMessageBtn{
-	width: 19%;
-	margin: 10px 10%;
+	width: 20%;
+	margin-bottom: 55px;
 	display: inline-block;
 }
 
 @media (max-width: 1400px) {
 	#panelNotifications{
-		/*height: 540px;*/
 		position: absolute;
 		top: 465px;
 		bottom: 10px;
@@ -511,7 +521,7 @@ hr{
 	#panelUser .panel-footer, #panelUser .panel-body{
 		display: inline-block;
 		margin: 0;
-		padding: 10px 10px;
+		padding: 2%;
 		height: 260px;
 		width: 50%;
 	}
@@ -547,9 +557,6 @@ hr{
 	}
 	#opis p{
 		max-height: 200px;
-	}
-	#panelUser .panel-body{
-		padding: 25% auto;
 	}
 	#panelUser .panel-body img{
 		width: 100%;
@@ -599,10 +606,7 @@ hr{
 	}
 	#panelUser, #panelUser .panel-heading, #panelUser .panel-body, #panelUser .panel-footer{
 		width: 100%;
-	}
-	/*#panelUser .panel-body{
-		height: 160px;
-	}*/
+	}	
 	#panelUser .panel-body img{
 		width: initial;
 		height: 100%;
@@ -613,12 +617,11 @@ hr{
 	}
 	#panelNotifications{
 		width: 80%;
-		height: 200px;
+		height: 300px;
 		margin: 20px 10%;
 	}
 	#panelNotifications .panel-body{
 		width: 100%;
-		height: 80%!important;
 	}
 
 	#panelUser, #panelNotifications, #panelJobs{
@@ -628,12 +631,8 @@ hr{
 		width: 99%;
 		margin: 0;
 	}
-	.panelMessages, #panelRazgovora{
-		width: 100%;
-		min-width: 468px;
-	}
-	.panelMessages .col-lg-4 .col-sm-4{
-		height: 20%;
+	.panelMessages .col-sm-4{
+		max-height: 50%;
 	}
 
 }
@@ -644,11 +643,11 @@ hr{
 	#updateProfileBtn, #getProfileBtn, #getConversationsBtn{
 		margin: 12px auto;
 	}
+	#logoutBtn{
+		float: right;
+	}
 }
 @media (max-width: 635px) {
-	.logoTitle{
-		display: block;
-	}
 	#panelUser .panel-body img{
 		height: 100%;
 		max-width: 100%;
@@ -684,9 +683,8 @@ hr{
 	#updateProfileBtn, #getProfileBtn, #getConversationsBtn, #logoutBtn{
 		transform: scale(0.6);
 		display: inline-block;
-		margin: 0;
 	}
-	#logoutBtn{
-		float: none;
-	}
+}
+@media (max-height: 600px) {
+	
 }

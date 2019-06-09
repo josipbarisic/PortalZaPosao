@@ -14,7 +14,7 @@ switch($sModalId)
 					<h2 class="modal-title">Registracija poslodavca</h2>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="action_registration.php" method="POST">
+				<form class="form-horizontal" action="action_registration.php" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="reg_type" value="employer">
 					<div class="form-group row">
 						<label class="control-label col-lg-3 col-xs-3">Ime</label>
@@ -34,7 +34,9 @@ switch($sModalId)
 					</div>
 					<div class="form-group">
 						<label class="control-label col-lg-3 col-xs-3">Slika profila</label>
-						<div class="col-lg-8 col-xs-8"><img src="images/poslodavacAvatar.png"/><input type="hidden" name="employerImg" value="images/poslodavacAvatar.png"></div>
+						<div class="col-lg-8 col-xs-8">
+							<input type="file" accept="image/*" name="empImg">
+						</div>
 					</div>
 
 					<div class="modal-footer">
@@ -48,66 +50,66 @@ switch($sModalId)
 	case 'new_employee':
 ?>
 		<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h1 class="modal-title">Registracija posloprimca</h2>
-			</div>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h1 class="modal-title">Registracija posloprimca</h2>
+		</div>
+		<form class="form-horizontal" action="action_registration.php" method="POST">
 			<div class="modal-body">
-				<form class="form-horizontal" action="action_registration.php" method="POST">
-					<input type="hidden" name="reg_type" value="employee">
-					<div class="form-group">
-						<label class="control-label col-lg-3 col-xs-3">Ime</label>
-						<div class="col-lg-8 col-xs-8"><input class="form-control" type="text" name="employeeName" required></div>
+				<input type="hidden" name="reg_type" value="employee">
+				<div class="form-group">
+					<label class="control-label col-lg-3 col-xs-3">Ime</label>
+					<div class="col-lg-8 col-xs-8"><input class="form-control" type="text" name="employeeName" required></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-3 col-xs-3">Prezime</label>
+					<div class="col-lg-8 col-xs-8"><input class="form-control" type="text" name="employeeLastName" required></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-3 col-xs-3">Spol</label>
+					<div class="col-lg-8 col-xs-8 radios">
+						<label class="radio"><input type="radio" name="gender" value="M" required> Muško</label>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-lg-3 col-xs-3">Prezime</label>
-						<div class="col-lg-8 col-xs-8"><input class="form-control" type="text" name="employeeLastName" required></div>
+					<div class="col-lg-3 col-xs-3"></div>
+					<div class="col-lg-8 col-xs-8 radios">
+						<label class="radio"><input type="radio" name="gender" value="Z"> Žensko</label>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-lg-3 col-xs-3">Spol</label>
-						<div class="col-lg-8 col-xs-8 radios">
-							<label class="radio"><input type="radio" name="gender" value="M" required> Muško</label>
-						</div>
-						<div class="col-lg-3 col-xs-3"></div>
-						<div class="col-lg-8 col-xs-8 radios">
-							<label class="radio"><input type="radio" name="gender" value="Z"> Žensko</label>
-						</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-3 col-xs-3">E-mail</label>
+					<div class="col-lg-8 col-xs-8"><input class="form-control" type="email" name="empEmail" required></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-3 col-xs-3">Lozinka</label>
+					<div class="col-lg-8 col-xs-8"><input class="form-control" type="password" name="empPass" placeholder="Minimalno 8 znakova" minlength="8" required></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-3 col-xs-3">Opis</label>
+					<div class="col-lg-8 col-xs-8"><textarea maxlength="255" placeholder="Maksimalno 255 znakova" class="form-control" name="employeeText" required/></div>
+				</div>
+				<div class="form-group" onclick="GetUserCats()">
+					<label class="control-label col-lg-3 col-xs-3">Moje kategorije</label>
+					<div class="col-lg-5 col-xs-5">
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="Administracija" required>Administracija</label>
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="Ekonomija" required>Ekonomija</label>
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="Elektrotehnika" required>Elektrotehnika</label>
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="IT/Telekomunikacije" required>IT/Telekomunikacije</label>
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="Marketing" required>Marketing</label>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-lg-3 col-xs-3">E-mail</label>
-						<div class="col-lg-8 col-xs-8"><input class="form-control" type="email" name="empEmail" required></div>
+					<div class="col-lg-4 col-xs-4">
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="Obrazovanje" required>Obrazovanje</label>
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="Održavanje" required>Održavanje</label>
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="Transport" required>Transport</label>
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="Trgovina" required>Trgovina</label>
+						<label class="checkbox"><input type="checkbox" name="kategorija" value="Turizam" required>Turizam</label>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-lg-3 col-xs-3">Lozinka</label>
-						<div class="col-lg-8 col-xs-8"><input class="form-control" type="password" name="empPass" placeholder="Minimalno 8 znakova" minlength="8" required></div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-lg-3 col-xs-3">Opis</label>
-						<div class="col-lg-8 col-xs-8"><textarea maxlength="255" placeholder="Maksimalno 255 znakova" class="form-control" name="employeeText" required/></div>
-					</div>
-					<div class="form-group" onclick="GetUserCats()">
-						<label class="control-label col-lg-3 col-xs-3">Moje kategorije</label>
-						<div class="col-lg-5 col-xs-5">
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="Administracija" required>Administracija</label>
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="Ekonomija" required>Ekonomija</label>
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="Elektrotehnika" required>Elektrotehnika</label>
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="IT/Telekomunikacije" required>IT/Telekomunikacije</label>
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="Marketing" required>Marketing</label>
-						</div>
-						<div class="col-lg-4 col-xs-4">
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="Obrazovanje" required>Obrazovanje</label>
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="Održavanje" required>Održavanje</label>
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="Transport" required>Transport</label>
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="Trgovina" required>Trgovina</label>
-							<label class="checkbox"><input type="checkbox" name="kategorija" value="Turizam" required>Turizam</label>
-						</div>
-					</div>
-					<input type="hidden" name="employeeCategories" id="empCats">
-					<div class="modal-footer">
-						<button data-dismiss="modal" class="btn btn-danger">Odustani</button>
-						<button type="submit" class="btn btn-primary">Registriraj se</button>	
-					</div>
-				</form>
+				</div>
+				<input type="hidden" name="employeeCategories" id="empCats">
 			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-danger">Odustani</button>
+				<button type="submit" class="btn btn-primary">Registriraj se</button>	
+			</div>
+		</form>
 <?php
 		break;
 	case 'update_employer':
@@ -128,7 +130,7 @@ switch($sModalId)
 				<h1 class="modal-title">Uredi Profil</h2>
 		</div>
 		<div class="modal-body">
-			<form class="form-horizontal" action="action_korisnici.php" method="POST">
+			<form class="form-horizontal" action="action_korisnici.php" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="action_id" value="uredi_poslodavca">
 
 				<div class="form-group">
@@ -152,6 +154,15 @@ switch($sModalId)
 						<input class="form-control" id="togglePassword" type="password" name="empPass" value="<?php echo $userData['lozinka']; ?>" required>
 
 						<label><input type="checkbox" onclick="TogglePassword()" value="Prikaži lozinku"> Prikaži lozinku</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-3 col-xs-3">Slika profila</label>
+
+					<div class="col-lg-8 col-xs-8">
+						<input type="file" name="empImg">
+						<input type="hidden" name="empImgNow" value="<?php echo $empData['slika'] ?>">
 					</div>
 				</div>
 
@@ -190,8 +201,8 @@ switch($sModalId)
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h1 class="modal-title">Uredi Profil</h2>
 		</div>
-		<div class="modal-body">
-			<form class="form-horizontal" action="action_korisnici.php" method="POST">
+		<form class="form-horizontal" action="action_korisnici.php" method="POST" enctype="multipart/form-data">
+			<div class="modal-body">
 				<input type="hidden" name="action_id" value="uredi_posloprimca">
 
 				<div class="form-group">
@@ -226,18 +237,27 @@ switch($sModalId)
 				</div>
 
 				<div class="form-group">
-						<label class="control-label col-lg-3 col-xs-3">Spol</label>
-						<div class="col-lg-8 col-xs-8">
-							<label><input type="radio" name="gender" value="M" required> Muško</label>
-						</div>
-						<script type="text/javascript">
-							CheckGender("<?php echo $empData['spol']; ?>");
-						</script>
-						<div class="col-lg-3 col-xs-3"></div>
-						<div class="col-lg-8 col-xs-8">
-							<label><input type="radio" name="gender" value="Z"> Žensko</label>
-						</div>
+					<label class="control-label col-lg-3 col-xs-3">Spol</label>
+					<div class="col-lg-8 col-xs-8">
+						<label><input type="radio" name="gender" value="M" required> Muško</label>
 					</div>
+					<div class="col-lg-3 col-xs-3"></div>
+					<div class="col-lg-8 col-xs-8">
+						<label><input type="radio" name="gender" value="Z"> Žensko</label>
+					</div>
+					<script type="text/javascript">
+						CheckGender("<?php echo $empData['spol']; ?>");
+					</script>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-3 col-xs-3">Slika profila</label>
+					<div class="col-lg-8 col-xs-8">
+						<input type="file" accept="image/*" name="empImg">
+						<input type="hidden" name="dbGender" value="<?php echo $empData['spol'] ?>">
+						<input type="hidden" name="imgNow" value="<?php echo $empData['slika'] ?>">
+					</div>
+				</div>
 
 				<div class="form-group">
 					<label class="control-label col-lg-3 col-xs-3">Opis</label>
@@ -269,13 +289,12 @@ switch($sModalId)
 						</div>
 					</div>
 					<input type="hidden" name="empCats" id="empCats" value="" required>
-				
-				<div class="modal-footer">
-					<button data-dismiss="modal" class="btn btn-danger">Odustani</button>
-					<button type="submit" class="btn btn-primary">Ažuriraj profil</button>	
-				</div>
-			</form>
-		</div>
+			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-danger">Odustani</button>
+				<button type="submit" class="btn btn-primary">Ažuriraj profil</button>	
+			</div>
+		</form>
 
 <?php
 		break;

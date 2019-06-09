@@ -93,7 +93,24 @@ function UpdateDbPoslodavca($con, $userId)
 {
 	$sQueryKorisnik = "UPDATE korisnici SET email='".$_POST['empEmail']."', lozinka='".$_POST['empPass']."' WHERE id=".$userId;
 
-	$sQueryPoslodavac = "UPDATE poslodavci SET ime='".$_POST['empName']."', opis='".$_POST['empText']."' WHERE poslodavac_id=".$userId;
+	$slika = $_POST['empImgNow'];
+
+	if($_FILES['empImg']['error'] == 0)
+	{
+		$uploadDir = getcwd().'/userProfileImages';//getcwd -> get current working directory
+		$imgName = $_FILES['empImg']['name'];
+		list($naziv, $ekstenzija) = explode('.', $imgName);
+
+		$tmp_name = $_FILES['empImg']['tmp_name'];
+
+		$name = "profilePicture".$userId.".".$ekstenzija;
+
+		move_uploaded_file($tmp_name, "$uploadDir/$name");
+
+		$slika = "userProfileImages/".$name;
+	}
+
+	$sQueryPoslodavac = "UPDATE poslodavci SET ime='".$_POST['empName']."', opis='".$_POST['empText']."', slika='".$slika."' WHERE poslodavac_id=".$userId;
 
 	$con->query($sQueryKorisnik);
 	$con->query($sQueryPoslodavac);
@@ -104,7 +121,40 @@ function UpdateDbPosloprimca($con, $userId)
 {
 	$sQueryKorisnik = "UPDATE korisnici SET email='".$_POST['empEmail']."', lozinka='".$_POST['empPass']."' WHERE id=".$userId;
 
-	$sQueryPosloprimac = "UPDATE posloprimci SET ime='".$_POST['empName']."', prezime='".$_POST['empLastName']."', spol='".$_POST['gender']."', opis='".$_POST['empText']."', kategorije='".$_POST['empCats']."' WHERE posloprimac_id=".$userId;
+	$slika = $_POST['imgNow'];
+	$slikaM = "userProfileImages/posloprimacMusko.png";
+	$slikaZ = "userProfileImages/posloprimacZensko.png";
+	
+	if($_POST['gender'] != $_POST['dbGender']){
+		if($slika == $slikaM || $slika == $slikaZ)
+		{
+			if($_POST['gender'] == 'M')
+			{
+				$slika = $slikaM;
+			}
+			else{
+				$slika = $slikaZ;
+			}
+		}
+	}
+	
+
+	if(!empty($_FILES) && $_FILES['empImg']['error'] == 0)
+	{
+		$uploadDir = getcwd().'/userProfileImages';//getcwd -> get current working directory
+		$imgName = $_FILES['empImg']['name'];
+		list($naziv, $ekstenzija) = explode('.', $imgName);
+
+		$tmp_name = $_FILES['empImg']['tmp_name'];
+
+		$name = "profilePicture".$userId.".".$ekstenzija;
+
+		move_uploaded_file($tmp_name, "$uploadDir/$name");
+
+		$slika = "userProfileImages/".$name;
+	}
+
+	$sQueryPosloprimac = "UPDATE posloprimci SET ime='".$_POST['empName']."', prezime='".$_POST['empLastName']."', spol='".$_POST['gender']."', opis='".$_POST['empText']."', kategorije='".$_POST['empCats']."', slika='".$slika."' WHERE posloprimac_id=".$userId;
 
 	$con->query($sQueryKorisnik);
 	$con->query($sQueryPosloprimac);
@@ -395,7 +445,8 @@ function GetDbRazgovorePoslodavca($con, $userId)
 			'razgovor_id' => $data['id'],
 			'poruke' => GetDbPorukeRazgovora($con, $data['id']),
 			'posloprimac_imePrezime' => $empData['ime'].' '.$empData['prezime'],
-			'posloprimac_id' => $empData['posloprimac_id']
+			'posloprimac_id' => $empData['posloprimac_id'],
+			'posloprimac_slika' => $empData['slika']
 		);
 		array_push($oRazgovori, $razgovor);
 	}
@@ -420,7 +471,8 @@ function GetDbRazgovorePosloprimca($con, $userId)
 			'razgovor_id' => $data['id'],
 			'poruke' => GetDbPorukeRazgovora($con, $data['id']),
 			'poslodavac_ime' => $empData['ime'],
-			'poslodavac_id' => $empData['poslodavac_id']
+			'poslodavac_id' => $empData['poslodavac_id'],
+			'poslodavac_slika' => $empData['slika']
 		);
 		array_push($oRazgovori, $razgovor);
 	}

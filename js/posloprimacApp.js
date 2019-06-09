@@ -55,38 +55,88 @@ oPosloprimacModul.directive("posloprimacPoslovi", function(){
 //DIO ZA RAZGOVORE
 oPosloprimacModul.controller("razgovoriController", function($scope, $http){
 	$scope.oRazgovori = [];
-	$scope.oPoruke = [];
 	$scope.oRazgovor = [];
 
 	$http({
 		method: "GET",
 		url: "http://localhost/PortalZaPosao/action_korisnici.php?action_id=dohvati_razgovorePosloprimca"
 	}).then(function(response){
-		console.log(response.data);
+		/*console.log(response.data);*/
 		$scope.oRazgovori = response.data;
 	}, function(response){
 		console.log("Error: učitavanje razgovora nije uspjelo.");
 	});
 
+	setInterval(function(){
+		var msgNumber = '';
+		var msgUpdateNumber = '';
+		$http({
+			method: "GET",
+			url: "http://localhost/PortalZaPosao/action_korisnici.php?action_id=dohvati_razgovorePosloprimca"
+		}).then(function(response){
+			//ZAPISI RAZGOVORE IZ TABLICE
+			$scope.oRazgovoriUpdate = response.data;
+
+			//TRENUTNI BROJ RAZGOVORA
+			$scope.oRazgovori.forEach(function(razgovor){
+				msgNumber += razgovor.poruke.length + " ";
+			});
+			
+			//UPDATEANI BROJ RAZGOVORA
+			$scope.oRazgovoriUpdate.forEach(function(razgovorUpdate){
+					msgUpdateNumber += razgovorUpdate.poruke.length + " ";
+				});
+
+			if(msgNumber != msgUpdateNumber)
+			{
+				$scope.oRazgovori = $scope.oRazgovoriUpdate;
+			}
+
+		}, function(response){
+			console.log("Error: Update razgovora nije uspio.");
+		});
+	}, 1000);
+
+
 	$scope.GetPoruke = function(r_id){
 		$scope.oRazgovor = [];
+		var msgCount = 0;
 		$scope.oRazgovori.forEach(function(razgovor){
 			if(razgovor.razgovor_id == r_id)
 			{
-				$scope.oPoruke = [];
-				razgovor.poruke.forEach(function(poruka){
-					$scope.oPoruke.push(poruka);
-				});
 				var oChat = {
 					razgovorId: r_id,
 					posiljatelj: razgovor.poslodavac_ime,
-					poruke: $scope.oPoruke
+					poruke: razgovor.poruke,
+					slikaPosiljatelja: razgovor.poslodavac_slika
 				}
 				$scope.oRazgovor.push(oChat);
+
+				msgCount = $scope.oRazgovor[0].poruke.length;
 			}
 		});
+		setInterval(function(){
+			$scope.oRazgovorUpdate = [];
+			$scope.oRazgovori.forEach(function(razgovor){
+				if(razgovor.razgovor_id == r_id)
+				{
+					var oChat = {
+						razgovorId: r_id,
+						posiljatelj: razgovor.poslodavac_ime,
+						poruke: razgovor.poruke
+					}
+					$scope.oRazgovorUpdate.push(oChat);
+					var msgCountUpdate = $scope.oRazgovorUpdate[0].poruke.length;
+					if(msgCount != msgCountUpdate)
+					{
+						$scope.oRazgovor = $scope.oRazgovorUpdate;
+						msgCount = msgCountUpdate;
+					}
+				}
+			});
+		}, 1000);
 	};
-	$scope.GetDateTime = function()
+	/*$scope.GetDateTime = function()
 	{
 		var dateNow = new Date();
 		var hours = dateNow.getHours();
@@ -105,7 +155,7 @@ oPosloprimacModul.controller("razgovoriController", function($scope, $http){
 		var dateTime = time+" "+date;
 
 		return dateTime;
-	};
+	};*/
 	$scope.SendMessage = function()
 	{
 		$.ajax({
@@ -114,7 +164,7 @@ oPosloprimacModul.controller("razgovoriController", function($scope, $http){
 			dataType: "text",
 			data: $('#formMessage').serialize(),
 			success: function(succesResponse){
-				console.log(succesResponse);
+				/*console.log(succesResponse);*/
 				if(succesResponse != "ERROR")
 				{
 					$http({
@@ -141,7 +191,7 @@ oPosloprimacModul.controller("razgovoriController", function($scope, $http){
 		var title = document.querySelector("#titlePosiljatelj");
 		if(posiljatelj.length > 25)
 		{
-			title.style.fontSize = "24px";
+			title.style.fontSize = "20px";
 			title.innerHTML = posiljatelj;
 		}
 		else

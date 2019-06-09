@@ -1,6 +1,7 @@
 <div id="panelRazgovora" class="panel panel-primary" ng-repeat="razgovor in oRazgovor">
 	<div id="panelHeader" class="panel-heading">
 		<h2 id="titlePosiljatelj" ng-init="RenderPosiljateljIme(razgovor.posiljatelj)">{{razgovor.posiljatelj}}</h2>
+		<img id="slikaRazgovora" src="{{razgovor.slikaPosiljatelja}}">
 	</div>
 	<div id="panelBody" class="panel-body">
 		<div ng-repeat="poruka in razgovor.poruke" class="alert alert-success porukaPoslodavac-{{poruka.korisnik}}">

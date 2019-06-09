@@ -36,7 +36,7 @@ class Korisnik
 
 class Poslodavac extends Korisnik
 {
-	public $slika = "images/poslodavacAvatar.png";
+	public $slika = "userProfileImages/poslodavacAvatar.png";
 
 	public function __construct($id=null, $email=null, $pass=null, $ime=null, $opis=null, $slika=null)
 	{
@@ -54,7 +54,7 @@ class Posloprimac extends Korisnik
 	public $kategorije = "N/A";
 	public $prezime = "N/A";
 	public $spol = "N/A";
-	public $slika = "images/posloprimacMusko.png";
+	public $slika = "userProfileImages/posloprimacMusko.png";
 
 	public function __construct($id=null, $email=null, $pass=null, $ime=null, $opis=null, $kat=null, $prezime=null, $spol=null, $slika=null)
 	{
