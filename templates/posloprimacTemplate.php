@@ -30,7 +30,7 @@
 
 		    <button id="updateProfileBtn" onclick="GetModal('modals.php?modal_id=update_employee')" class="btn btn-primary"><span><i class="far fa-edit"></i></span> Uredi profil</button>
 		    
-		    <button id="getConversationsBtn" onclick="window.location='razgovori.php'" class="btn btn-primary"><i class="fas fa-user-circle"></i> Razgovori</button>
+		    <button id="getConversationsBtn" onclick="window.location='razgovori.php'" class="btn btn-primary"><i class="far fa-comments"></i> Razgovori</button>
 		    
 		    <button id="logoutBtn" class="btn navbar-right" onclick="window.location='logout.php'"><i class="fas fa-sign-out-alt"></i>Odjavi se</button>
 	    </div>

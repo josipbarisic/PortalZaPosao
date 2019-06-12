@@ -4,8 +4,10 @@
 		<img id="slikaRazgovora" src="{{razgovor.slikaPosiljatelja}}">
 	</div>
 	<div id="panelBody" class="panel-body">
-		<div ng-repeat="poruka in razgovor.poruke" class="alert alert-success porukaPoslodavac-{{poruka.korisnik}}">
-			<strong>{{poruka.sadrzaj}}</strong>
+		<div ng-repeat="poruka in razgovor.poruke" class="porukaPoslodavac-{{poruka.korisnik}}">
+			<p class="sadrzajPoruke">{{poruka.sadrzaj}}</p>
+			<img class="slikaPosiljatelja" src="{{razgovor.slikaPosiljatelja}}">
+			<img class="slikaPrimatelja" src="{{razgovor.slikaPrimatelja}}">
 			<hr>
 			<footer class="vrijemeSlanja">Poslano: {{poruka.vrijeme_datum}}</footer>
 		</div>
@@ -14,7 +16,7 @@
 		<form id="formMessage">
 			<input type="hidden" name="action_id" value="posalji_porukuPoslodavac">
 			<input type="hidden" name="razgovor_id" ng-value="razgovor.razgovorId">
-			<textarea rows="2" name="textPoruke" id="textPoruke" class="form-control" placeholder="Nova poruka" maxlength="990"></textarea>
+			<textarea name="textPoruke" id="textPoruke" class="form-control" placeholder="Nova poruka" maxlength="999"></textarea>
 			<button ng-click="SendMessage()" id="sendMessageBtn" class="btn btn-primary">Pošalji</button>
 		</form>
 	</div>

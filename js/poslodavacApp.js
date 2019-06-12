@@ -6,7 +6,7 @@ oPoslodavacModul.controller("obavijestiController", function($scope, $http){
 	$scope.oObavijesti = [];
 	$http({
 		method: "GET",
-		url: "http://localhost/PortalZaPosao/action_korisnici.php?action_id=dohvati_obavijestiPoslodavca",
+		url: "action_korisnici.php?action_id=dohvati_obavijestiPoslodavca",
 
 	}).then(function(response){
 		/*console.log(response.data);*/
@@ -31,7 +31,7 @@ oPoslodavacModul.controller("posloviController", function($scope, $http){
 
 	$http({
 		method: "GET",
-		url: "http://localhost/PortalZaPosao/action_korisnici.php?action_id=dohvati_poslovePoslodavca"
+		url: "action_korisnici.php?action_id=dohvati_poslovePoslodavca"
 	}).then(function(response){
 		/*console.log(response.data);*/
 		$scope.oPoslovi = response.data;
@@ -59,7 +59,7 @@ oPoslodavacModul.controller("razgovoriController", function($scope, $http){
 
 	$http({
 		method: "GET",
-		url: "http://localhost/PortalZaPosao/action_korisnici.php?action_id=dohvati_razgovorePoslodavca"
+		url: "action_korisnici.php?action_id=dohvati_razgovorePoslodavca"
 	}).then(function(response){
 		/*console.log(response.data);*/
 		$scope.oRazgovori = response.data;
@@ -72,7 +72,7 @@ oPoslodavacModul.controller("razgovoriController", function($scope, $http){
 		var msgUpdateNumber = '';
 		$http({
 			method: "GET",
-			url: "http://localhost/PortalZaPosao/action_korisnici.php?action_id=dohvati_razgovorePoslodavca"
+			url: "action_korisnici.php?action_id=dohvati_razgovorePoslodavca"
 		}).then(function(response){
 			//ZAPISI RAZGOVORE IZ TABLICE
 			$scope.oRazgovoriUpdate = response.data;
@@ -107,7 +107,8 @@ oPoslodavacModul.controller("razgovoriController", function($scope, $http){
 					razgovorId: r_id,
 					posiljatelj: razgovor.posloprimac_imePrezime,
 					poruke: razgovor.poruke,
-					slikaPosiljatelja: razgovor.posloprimac_slika
+					slikaPosiljatelja: razgovor.posloprimac_slika,
+					slikaPrimatelja: razgovor.poslodavac_slika
 				}
 				$scope.oRazgovor.push(oChat);
 
@@ -123,7 +124,9 @@ oPoslodavacModul.controller("razgovoriController", function($scope, $http){
 					var oChat = {
 						razgovorId: r_id,
 						posiljatelj: razgovor.posloprimac_imePrezime,
-						poruke: razgovor.poruke
+						poruke: razgovor.poruke,
+						slikaPosiljatelja: razgovor.posloprimac_slika,
+						slikaPrimatelja: razgovor.poslodavac_slika
 					}
 					$scope.oRazgovorUpdate.push(oChat);
 
@@ -170,7 +173,7 @@ oPoslodavacModul.controller("razgovoriController", function($scope, $http){
 				{
 					$http({
 						method: "GET",
-						url: "http://localhost/PortalZaPosao/action_korisnici.php?action_id=dohvati_razgovorePoslodavca"
+						url: "action_korisnici.php?action_id=dohvati_razgovorePoslodavca"
 					}).then(function(response){
 						$scope.oRazgovori = response.data;
 						$scope.GetPoruke(succesResponse);
@@ -211,10 +214,15 @@ oPoslodavacModul.directive("poslodavacPoruke", function(){
 
 //NAKON PROMJENE U DOM ELEMENTU 'poslodavac-poruke' IZVRSI FUNKCIJU
 $('poslodavac-poruke').on("DOMSubtreeModified", function(){
-	var div = document.getElementById("panelBody");
-	if(div)
+	var divPoruke = document.getElementById("panelBody");
+	var panel = document.getElementById("panelRazgovora");
+	var image = document.querySelector("#slikaRazgovora");
+	if(divPoruke)
 	{
-		div.scrollTop = div.scrollHeight;
+		divPoruke.scrollTop = divPoruke.scrollHeight;
+		if(image.getAttribute('src') != '{{razgovor.slikaPosiljatelja}}')
+		{
+			panel.scrollIntoView();
+		}
 	}
-	
 });

@@ -3,9 +3,20 @@
 session_start();
 if(!empty($_SESSION['user_id']))
 {
-	session_unset();
+	include 'connection.php';
+	$sQueryCheckUser = "SELECT * FROM korisnici WHERE id=".$_SESSION['user_id'];
+	$dbResult = $oConnection->query($sQueryCheckUser);
+	$data = $dbResult->fetch(PDO::FETCH_ASSOC);
+	/*var_dump($data);*/
+	if($data['vrsta_korisnika'] == 'posloprimac')
+	{
+		header("Location: posloprimac.php");
+	}
+	else
+	{
+		header("Location: poslodavac.php");
+	}
 }
-session_destroy();
 
 ?>
 

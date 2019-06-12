@@ -16,12 +16,12 @@
 		<td>{{posao.naziv}}</td>
 		<td>{{posao.kategorija}}</td>
 		<td>{{posao.dostupnost}}</td>
-		<td><button class="btn btn-primary" ng-click="GetModalPosla(posao.id)">Uredi</button></td>
+		<td><button class="btn btn-primary posaoBtns" ng-click="GetModalPosla(posao.id)"><i class="far fa-edit"></i><span class="posaoBtnsText"> Uredi</span></button></td>
 		<td>
 			<form action="action_korisnici.php" method="POST">
 				<input type="hidden" name="action_id" value="obrisi_posao">
 				<input type="hidden" name="posaoId" ng-value="posao.id">
-				<button type="submit" class="btn btn-danger">Obriši</button>
+				<button type="submit" class="btn btn-danger posaoBtns"><i class="fas fa-trash-alt" hidden></i><span class="posaoBtnsText"> Obriši</span></button>
 			</form>
 		</td>
 	</tr>

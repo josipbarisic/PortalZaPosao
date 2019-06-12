@@ -6,8 +6,8 @@ $oConfig = new Config();
 /*try
 {*/
 	$oConnection = new PDO("mysql:host=$oConfig->host;dbname=$oConfig->dbName;charset=latin2", $oConfig->username, $oConfig->password);
-	/*
-	 echo "Connected to DB $oConfig->dbName";
+	
+/*	 echo "Connected to DB $oConfig->dbName";
 }
 catch(PDOException $err)
 {

@@ -53,7 +53,7 @@ switch($sModalId)
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h1 class="modal-title">Registracija posloprimca</h2>
 		</div>
-		<form class="form-horizontal" action="action_registration.php" method="POST">
+		<form class="form-horizontal" action="action_registration.php" method="POST" enctype="multipart/form-data">
 			<div class="modal-body">
 				<input type="hidden" name="reg_type" value="employee">
 				<div class="form-group">
@@ -85,6 +85,12 @@ switch($sModalId)
 				<div class="form-group">
 					<label class="control-label col-lg-3 col-xs-3">Opis</label>
 					<div class="col-lg-8 col-xs-8"><textarea maxlength="255" placeholder="Maksimalno 255 znakova" class="form-control" name="employeeText" required/></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-3 col-xs-3">Slika profila</label>
+					<div class="col-lg-8 col-xs-8">
+						<input type="file" accept="image/*" name="empImg">
+					</div>
 				</div>
 				<div class="form-group" onclick="GetUserCats()">
 					<label class="control-label col-lg-3 col-xs-3">Moje kategorije</label>
@@ -161,8 +167,8 @@ switch($sModalId)
 					<label class="control-label col-lg-3 col-xs-3">Slika profila</label>
 
 					<div class="col-lg-8 col-xs-8">
-						<input type="file" name="empImg">
-						<input type="hidden" name="empImgNow" value="<?php echo $empData['slika'] ?>">
+						<input type="file" accept="image/*" name="empImg">
+						<input type="hidden" name="empImgNow" value="<?php echo $empData['slika']; ?>">
 					</div>
 				</div>
 

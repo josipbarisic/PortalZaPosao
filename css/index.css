@@ -8,6 +8,7 @@ body{
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
+	min-width: 410px;
 }
 
 button{
@@ -72,11 +73,6 @@ body ::-webkit-scrollbar-thumb
 .inputLabel{
 	color: white;
 	margin: 0 10px;
-}
-@media (max-width: 415px) {
-	#logoTitle{
-		display: none!important;
-	}
 }
 
 /*NASLOVNICA CSS*/

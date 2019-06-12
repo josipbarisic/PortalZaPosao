@@ -1,6 +1,8 @@
 <?php 
 
 include "connection.php";
+header("Access-Control-Allow-Headers: Authorization, Content-Type");
+header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json;charset=latin2;'); 
 
 $request = "";
@@ -86,25 +88,46 @@ if(!empty($_SESSION['user_id']))
 else
 {
 	echo "ERROR";
+	/*header("Location: index.php");*/
 }
 
 //KORISNICI
+function GenerateRandomString()
+{
+	//GENERIRAJ RANDOM STRING ZA NAZIV SLIKE
+	$string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$stringArray = str_split($string, 1);
+	$randomString = '';
+	foreach ($stringArray as $character) {
+		$randomString .= $stringArray[mt_rand(0, sizeof($stringArray)-1)];
+	}
+	return $randomString;
+}
 function UpdateDbPoslodavca($con, $userId)
 {
 	$sQueryKorisnik = "UPDATE korisnici SET email='".$_POST['empEmail']."', lozinka='".$_POST['empPass']."' WHERE id=".$userId;
 
 	$slika = $_POST['empImgNow'];
 
-	if($_FILES['empImg']['error'] == 0)
+	
+	if($_FILES['empImg']['error'] == 0 && $_FILES['empImg']['size'] > 0)
 	{
+		$randStr = GenerateRandomString();
+
 		$uploadDir = getcwd().'/userProfileImages';//getcwd -> get current working directory
 		$imgName = $_FILES['empImg']['name'];
 		list($naziv, $ekstenzija) = explode('.', $imgName);
 
 		$tmp_name = $_FILES['empImg']['tmp_name'];
 
-		$name = "profilePicture".$userId.".".$ekstenzija;
+		$name = $randStr."profilePicture".$userId.".".$ekstenzija;
 
+		//BRISE FILE/SLIKU AKO NIJE DEFAULT SLIKA
+		if($slika != 'userProfileImages/poslodavacAvatar.png')
+		{
+			unlink($slika);
+		}
+		
 		move_uploaded_file($tmp_name, "$uploadDir/$name");
 
 		$slika = "userProfileImages/".$name;
@@ -139,15 +162,23 @@ function UpdateDbPosloprimca($con, $userId)
 	}
 	
 
-	if(!empty($_FILES) && $_FILES['empImg']['error'] == 0)
+	if($_FILES['empImg']['error'] == 0 && $_FILES['empImg']['size'] > 0)
 	{
+		$randStr = GenerateRandomString();
+
 		$uploadDir = getcwd().'/userProfileImages';//getcwd -> get current working directory
 		$imgName = $_FILES['empImg']['name'];
 		list($naziv, $ekstenzija) = explode('.', $imgName);
 
 		$tmp_name = $_FILES['empImg']['tmp_name'];
 
-		$name = "profilePicture".$userId.".".$ekstenzija;
+		$name = $randStr."profilePicture".$userId.".".$ekstenzija;
+
+		//BRISE FILE/SLIKU AKO NIJE DEFAULT SLIKA
+		if($slika != 'userProfileImages/posloprimacMusko.png' && $slika != 'userProfileImages/posloprimacZensko.png')
+		{
+			unlink($slika);
+		}
 
 		move_uploaded_file($tmp_name, "$uploadDir/$name");
 
@@ -437,16 +468,21 @@ function GetDbRazgovorePoslodavca($con, $userId)
 	
 	while($data = $dbResultRazgovori->fetch(PDO::FETCH_ASSOC))
 	{
+		$sQueryPoslodavac = "SELECT * FROM poslodavci WHERE poslodavac_id=".$data['poslodavac_id'];
+		$dbResultPoslodavac = $con->query($sQueryPoslodavac);
+		$employerData = $dbResultPoslodavac->fetch(PDO::FETCH_ASSOC);
+
 		$sQueryPosloprimac = "SELECT * FROM posloprimci WHERE posloprimac_id=".$data['posloprimac_id'];
 		$dbResultPosloprimac = $con->query($sQueryPosloprimac);
-		$empData = $dbResultPosloprimac->fetch(PDO::FETCH_ASSOC);
+		$employeeData = $dbResultPosloprimac->fetch(PDO::FETCH_ASSOC);
 
 		$razgovor = array(
 			'razgovor_id' => $data['id'],
 			'poruke' => GetDbPorukeRazgovora($con, $data['id']),
-			'posloprimac_imePrezime' => $empData['ime'].' '.$empData['prezime'],
-			'posloprimac_id' => $empData['posloprimac_id'],
-			'posloprimac_slika' => $empData['slika']
+			'posloprimac_imePrezime' => $employeeData['ime'].' '.$employeeData['prezime'],
+			'posloprimac_id' => $employeeData['posloprimac_id'],
+			'posloprimac_slika' => $employeeData['slika'],
+			'poslodavac_slika' => $employerData['slika']
 		);
 		array_push($oRazgovori, $razgovor);
 	}
@@ -465,14 +501,19 @@ function GetDbRazgovorePosloprimca($con, $userId)
 	{
 		$sQueryPoslodavac = "SELECT * FROM poslodavci WHERE poslodavac_id=".$data['poslodavac_id'];
 		$dbResultPoslodavac = $con->query($sQueryPoslodavac);
-		$empData = $dbResultPoslodavac->fetch(PDO::FETCH_ASSOC);
+		$employerData = $dbResultPoslodavac->fetch(PDO::FETCH_ASSOC);
+
+		$sQueryPosloprimac = "SELECT * FROM posloprimci WHERE posloprimac_id=".$data['posloprimac_id'];
+		$dbResultPosloprimac = $con->query($sQueryPosloprimac);
+		$employeeData = $dbResultPosloprimac->fetch(PDO::FETCH_ASSOC);
 
 		$razgovor = array(
 			'razgovor_id' => $data['id'],
 			'poruke' => GetDbPorukeRazgovora($con, $data['id']),
-			'poslodavac_ime' => $empData['ime'],
-			'poslodavac_id' => $empData['poslodavac_id'],
-			'poslodavac_slika' => $empData['slika']
+			'poslodavac_ime' => $employerData['ime'],
+			'poslodavac_id' => $employerData['poslodavac_id'],
+			'poslodavac_slika' => $employerData['slika'],
+			'posloprimac_slika' => $employeeData['slika']
 		);
 		array_push($oRazgovori, $razgovor);
 	}
