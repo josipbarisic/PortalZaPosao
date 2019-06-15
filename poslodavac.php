@@ -21,7 +21,6 @@ if(!empty($_SESSION['user_id']))
 
 		include 'templates/poslodavacTemplate.php';
 
-		/*var_dump($oPoslodavac);*/
 	}
 	else
 	{

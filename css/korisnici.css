@@ -420,6 +420,9 @@ body ::-webkit-scrollbar-thumb
 	background-color: rgba(27, 156, 252, 0.6);
 	color: black!important;
 }
+.list-group-item:hover{
+	cursor: pointer;
+}
 #divMessages .panel, #divMessages .panel-heading{
 	background-color: rgba(27, 156, 252, 0.3);
 }

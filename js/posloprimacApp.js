@@ -6,7 +6,7 @@ oPosloprimacModul.controller("obavijestiController", function($scope, $http){
 
 	$http({
 		method: "GET",
-		url: "action_korisnici.php?action_id=dohvati_obavijestiPosloprimca",
+		url: "action_korisnici.php?action_id=dohvati_obavijestiPosloprimca"
 	}).then(function(response){
 		/*console.log(response.data);*/
 		$scope.oObavijesti = response.data;
@@ -89,6 +89,8 @@ oPosloprimacModul.controller("razgovoriController", function($scope, $http){
 
 			if(msgNumber != msgUpdateNumber)
 			{
+				/*console.log(msgNumber);
+				console.log(msgUpdateNumber);*/
 				$scope.oRazgovori = $scope.oRazgovoriUpdate;
 			}
 

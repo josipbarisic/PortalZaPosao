@@ -6,8 +6,7 @@ oPoslodavacModul.controller("obavijestiController", function($scope, $http){
 	$scope.oObavijesti = [];
 	$http({
 		method: "GET",
-		url: "action_korisnici.php?action_id=dohvati_obavijestiPoslodavca",
-
+		url: "action_korisnici.php?action_id=dohvati_obavijestiPoslodavca"
 	}).then(function(response){
 		/*console.log(response.data);*/
 		$scope.oObavijesti = response.data;
